@@ -5,42 +5,42 @@
 // Creating Objects: Function Constructors
 
 // Former way of creating one object
-// var john = {
-//       name: 'John',
-//       yearOfBirth: 1990,
-//       job: 'teacher'
-// };
+/* var john = {
+      name: 'John',
+      yearOfBirth: 1990,
+      job: 'teacher'
+};
 
 // Function Constructors, implies that we use a function
 // Capital letter
-// var Person = function (name, yearOfBirth, job) {
-//       this.name = name;
-//       this.yearOfBirth = yearOfBirth;
-//       this.job = job;
+var Person = function (name, yearOfBirth, job) {
+      this.name = name;
+      this.yearOfBirth = yearOfBirth;
+      this.job = job;
       // this.calculateAge = function () {
       //       console.log(2018 - this.yearOfBirth);
       // }
-// }
+}
 
 // Adds method to prototype
-// Person.prototype.calculateAge = function () {
-//       console.log(2018 - this.yearOfBirth);
-// }
+Person.prototype.calculateAge = function () {
+      console.log(2018 - this.yearOfBirth);
+}
 
 // Adds properties to prototype
-// Person.prototype.lastName = 'Smith';
-//
-// var john = new Person ('John', 1990, 'teacher');
-// var jane = new Person ('Jane', 1969, 'designer');
-// var mark = new Person ('Mark', 1948, 'retired');
-//
-// john.calculateAge();
-// jane.calculateAge();
-// mark.calculateAge();
-//
-// console.log(john.lastName);
-// console.log(jane.lastName);
-// console.log(mark.lastName);
+Person.prototype.lastName = 'Smith';
+
+var john = new Person ('John', 1990, 'teacher');
+var jane = new Person ('Jane', 1969, 'designer');
+var mark = new Person ('Mark', 1948, 'retired');
+
+john.calculateAge();
+jane.calculateAge();
+mark.calculateAge();
+
+console.log(john.lastName);
+console.log(jane.lastName);
+console.log(mark.lastName); */
 
 
 
@@ -59,22 +59,22 @@
 // Using object prototype to create new object
 // Allows us to directly specify which object should be a prototype
 
-// var personProto = {
-//       calculateAge: function () {
-//             console.log(2016 - this.yearOfBirth);
-//       }
-// };
-//
-// var john = Object.create(personProto);
-// john.name = 'john';
-// john.yearOfBirth = 1990;
-// john.job = 'teacher';
-//
-// var jane = Object.create(personProto, {
-//       name: { value: 'Jane' },
-//       yearOfBirth: { value: 1969 },
-//       job: { value: 'designer' }
-// });
+/* var personProto = {
+      calculateAge: function () {
+            console.log(2016 - this.yearOfBirth);
+      }
+};
+
+var john = Object.create(personProto);
+john.name = 'john';
+john.yearOfBirth = 1990;
+john.job = 'teacher';
+
+var jane = Object.create(personProto, {
+      name: { value: 'Jane' },
+      yearOfBirth: { value: 1969 },
+      job: { value: 'designer' }
+}); */
 
 
 
@@ -82,7 +82,7 @@
 // Primitives vs Objects
 
 // Primitives
-var a = 23;
+/* var a = 23;
 var b = a;
 a = 46;
 console.log(a);
@@ -114,4 +114,26 @@ function change (a, b) {
 }
 change(age, obj);
 console.log(age);
-console.log(obj.city);
+console.log(obj.city); */
+
+
+
+// Lecture 6
+// First Class Functions: Passing Functions As Arguments
+
+// See notes from Lesson-6.md
+
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc (arr, fn) {
+      var arrRes = [];
+      for (var i = 0; i < arr.length; i++) {
+            arrRes.push(fn(arr[i]));
+      }
+      return arrRes;
+}
+
+// Callback function
+function calculateAge (el) {
+      return 2016 - el;
+}
