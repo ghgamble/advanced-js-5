@@ -59,19 +59,59 @@
 // Using object prototype to create new object
 // Allows us to directly specify which object should be a prototype
 
-var personProto = {
-      calculateAge: function () {
-            console.log(2016 - this.yearOfBirth);
-      }
+// var personProto = {
+//       calculateAge: function () {
+//             console.log(2016 - this.yearOfBirth);
+//       }
+// };
+//
+// var john = Object.create(personProto);
+// john.name = 'john';
+// john.yearOfBirth = 1990;
+// john.job = 'teacher';
+//
+// var jane = Object.create(personProto, {
+//       name: { value: 'Jane' },
+//       yearOfBirth: { value: 1969 },
+//       job: { value: 'designer' }
+// });
+
+
+
+// Lecture 5
+// Primitives vs Objects
+
+// Primitives
+var a = 23;
+var b = a;
+a = 46;
+console.log(a);
+console.log(b);
+
+// Each of the variables hold their own copy of the data, they don't reference anything
+
+// Objects
+var obj1 = {
+      name: 'John',
+      age: 26
 };
+var obj2 = obj1;
+obj1.age = 30;
+console.log(obj1.age);
+console.log(obj2.age);
 
-var john = Object.create(personProto);
-john.name = 'john';
-john.yearOfBirth = 1990;
-john.job = 'teacher';
+// Then why did this happen? We did not create a new object, we just created a reference that points to the first object.
 
-var jane = Object.create(personProto, {
-      name: { value: 'Jane' },
-      yearOfBirth: { value: 1969 },
-      job: { value: 'designer' }
-});
+// Functions
+var age = 27;
+var obj = {
+      name: 'Jonas',
+      city: 'Lisbon'
+};
+function change (a, b) {
+      a = 30;
+      b.city = 'San Francisco';
+}
+change(age, obj);
+console.log(age);
+console.log(obj.city);
