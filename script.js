@@ -1,3 +1,6 @@
+
+
+
 // Lecture 2
 // Creating Objects: Function Constructors
 
@@ -46,4 +49,29 @@
 
 // All in browser console
 // hasOwnProperty
-// instanceof => john instanceof Person === true 
+// instanceof => john instanceof Person === true
+
+
+
+// Lecture 4
+// Creating Objects: object.create
+
+// Using object prototype to create new object
+// Allows us to directly specify which object should be a prototype
+
+var personProto = {
+      calculateAge: function () {
+            console.log(2016 - this.yearOfBirth);
+      }
+};
+
+var john = Object.create(personProto);
+john.name = 'john';
+john.yearOfBirth = 1990;
+john.job = 'teacher';
+
+var jane = Object.create(personProto, {
+      name: { value: 'Jane' },
+      yearOfBirth: { value: 1969 },
+      job: { value: 'designer' }
+});
