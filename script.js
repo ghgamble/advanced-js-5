@@ -1,6 +1,3 @@
-
-
-
 // Lecture 2
 // Creating Objects: Function Constructors
 
@@ -166,7 +163,7 @@ console.log(rates); */
 // First Class Functions: Functions Returning Functions
 
 // Anonymous function doesn't have a name
-function interviewQuestion (job) {
+/* function interviewQuestion (job) {
       if (job === 'designer') {
             return function (name) {
                   console.log(name + ', can you please explain what UX design is?');
@@ -191,4 +188,33 @@ designerQuestion('Jane');
 designerQuestion('Mark');
 
 // Another simpler way of calling the functions
-interviewQuestion('teacher')('Mark');
+interviewQuestion('teacher')('Mark'); */
+
+
+
+// Lecture 8
+// Immediately Invoked Function Expressions (IIFE)
+
+// One way to do it
+// function game () {
+//       var score = Math.random () * 10;
+//       console.log(score >= 5);
+// }
+// game();
+// game();
+
+// Better way, IIFE
+// Data privacy => can't access outside of function, not going to reuse code
+// Safely use variables, don't interfere with other variables
+
+(function () {
+      var score = Math.random () * 10;
+      console.log(score >= 5);
+})();
+
+// console.log(score);
+
+(function (goodLuck) {
+      var score = Math.random () * 10;
+      console.log(score >= 5 - goodLuck);
+})(5);
