@@ -207,7 +207,7 @@ interviewQuestion('teacher')('Mark'); */
 // Data privacy => can't access outside of function, not going to reuse code
 // Safely use variables, don't interfere with other variables
 
-(function () {
+/*(function () {
       var score = Math.random () * 10;
       console.log(score >= 5);
 })();
@@ -217,4 +217,24 @@ interviewQuestion('teacher')('Mark'); */
 (function (goodLuck) {
       var score = Math.random () * 10;
       console.log(score >= 5 - goodLuck);
-})(5);
+})(5);*/
+
+
+
+// Lecture 9
+// Closures
+
+// Write a function that returns a function that calculates how many years til retirement
+
+function retirement (retirementAge) {
+      var a = ' years left until retirement.';
+      return function (yearOfBirth) {
+            var age = 2018 - yearOfBirth;
+            console.log((retirementAge - age) + a);
+      }
+}
+
+var retirementUS = retirement(66);
+retirementUS(1990);
+
+retirement(66)(1990);
