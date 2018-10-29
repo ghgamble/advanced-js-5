@@ -230,7 +230,9 @@ interviewQuestion('teacher')('Mark'); */
 
 // An inner function always has access to the variables and parameters of its outer function, even after the outer function has returned. Variable object still stays in memory. Scope chain is a pointer to variable objects. Scope chain always stays intact.
 
-function retirement (retirementAge) {
+// Start a task and you want to specify something that happens when that task is done with stuff that is available to you when you start the task.
+
+/* function retirement (retirementAge) {
       var a = ' years left until retirement.';
       return function (yearOfBirth) {
             var age = 2018 - yearOfBirth;
@@ -261,4 +263,68 @@ function interviewQuestion (job) {
       }
 }
 
-interviewQuestion('teacher')('John');
+interviewQuestion('teacher')('John'); */
+
+
+
+// Lecture 10
+// Bind, Call, Apply
+
+var john = {
+      name: 'John',
+      age: 26,
+      job: 'teacher',
+      presentation: function (style, timeOfDay) {
+            if (style === 'formal') {
+                  console.log('Good ' + timeOfDay + ', Ladies and gentlemen! I\'m ' + this.name + ', I\'m a ' + this.job + ' and I\'m ' + this.age + ' years old.');
+            } else if (style === 'friendly') {
+                  console.log('Hey! What\'s up? I\'m ' + this.name + ', and I\'m a ' +  this.job + ' and I\'m ' + this.age + ' years old. Have a nice ' + timeOfDay + '.');
+            }
+      }
+};
+
+var emily = {
+      name: 'Emily',
+      age: 35,
+      job: 'designer'
+};
+
+john.presentation('formal', 'morning');
+
+// Method borrowing
+// Call lets us call the this variable on another object. Accepts the this object and the other parameters
+// Apply accepts the this variable and an array. This example won't work because the initial john isn't built as an array
+
+john.presentation.call(emily, 'friendly', 'afternoon');
+// john.presentation.apply(emily, ['friendly', 'afternoon']);
+
+// Bind method uses a function
+var johnFriendly = john.presentation.bind(john, 'friendly');
+johnFriendly('morning');
+johnFriendly('night');
+
+var emilyFormal = john.presentation.bind(emily, 'formal');
+emilyFormal('afternoon');
+
+var years = [1990, 1965, 1937, 2005, 1998];
+
+function arrayCalc (arr, fn) {
+      var arrRes = [];
+      for (var i = 0; i < arr.length; i++) {
+            arrRes.push(fn(arr[i]));
+      }
+      return arrRes;
+}
+
+function calculateAge (el) {
+      return 2018 - el;
+}
+
+function isFullAge (limit, el) {
+      return el >= limit;
+}
+
+var ages = arrayCalc(years, calculateAge);
+var fullJapan = arrayCalc(ages, isFullAge.bind(this, 20));
+console.log(ages);
+console.log(fullJapan);
