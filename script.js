@@ -345,12 +345,20 @@ console.log(fullJapan); */
                   console.log(i + ': ' + this.answers[i]);
             }
       }
-      Question.prototype.checkAnswer = function(answer) {
+      Question.prototype.checkAnswer = function(answer, callback) {
+            var sc;
             if (answer === this.correct) {
                   console.log('Correct answer!');
+                  sc = callback(true);
             } else {
                   console.log('Wrong answer. Try again!');
+                  score = callback(false);
             }
+            this.displayScore(sc);
+      }
+      Question.prototype.displayScore = function (score) {
+            console.log('Your current score is ' + score);
+            console.log('-------------------------------');
       }
 
       var q1 = new Question ('Is JavaScript the coolest programming language in the world?', ['Yes', 'No'], 0);
@@ -359,10 +367,27 @@ console.log(fullJapan); */
 
       var questions = [q1, q2, q3];
 
-      var n = Math.floor(Math.random() * questions.length);
+      function score () {
+            var sc = 0;
+            return function (correct) {
+                  if (correct) {
+                        sc++;
+                  }
+                  return sc;
+            }
+      }
 
-      questions[n].displayQuestion();
+      var keepScore = score();
 
-      var answer = parseInt(prompt('Please select the correct answer.'));
-      questions[n].checkAnswer(answer);
+      function nextQuestion () {
+            var n = Math.floor(Math.random() * questions.length);
+            questions[n].displayQuestion();
+            var answer = prompt('Please select the correct answer.');
+            if (answer !== 'exit') {
+                  questions[n].checkAnswer(parseInt(answer), keepScore);
+                  nextQuestion();
+            }
+      }
+
+      nextQuestion();
 })();
